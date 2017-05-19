@@ -1,0 +1,59 @@
+  <ion-view  view-title="RT Monitor" style="color: white" >
+  	<ion-content class="overview-container">
+    	<ion-list class="listview">
+        
+        <ion-item>
+            <div class="icon-bg"><img src = "img/users.png" style="float:left;width:100px;height:100px;"/></div>
+            <div class = "user-info">
+               
+                <div class="info-bg">{{userdata.user.first_name}} {{userdata.user.last_name}}</div>
+                <div class="info-bg">{{userdata.user.email}}</div>
+            </div>
+        </ion-item>
+		<ion-item>
+            <div class="icon-bg"><img src = "img/nodes.png" style="float:left;width:100px;height:100px;"/></div>
+            <div class = "user-info">
+
+               <div class="info-bg" ng-repeat = "cluster in userdata.clusters">{{cluster.name}}</div>
+                
+            </div>
+        </ion-item>
+        <ion-item href="#/app/usergraphs">
+            <span class="icon-bg"><img class="icon-bg" src = "img/jobs.png"  style="float:left;width:100px;height:100px;"/></span>
+            <span class = "user-info">
+               
+                <div class="info-bg">Core Hours: {{userdata.summary.lastmonth.corehours}}</div>
+                <div class="info-bg">Jobs Run: {{userdata.summary.lastmonth.jobs}}</div>
+            </span>
+        </ion-item>
+        <ion-item>
+            <span class="icon-bg"><img class="icon-bg" src = "img/file.png" style="float:left;width:100px;height:100px;"/></span>
+            <span class = "user-info">
+               
+                <div class="info-bg">RFS Files: {{userdata.storage.rfscount}}</div>
+                <div class="info-bg">SDA Files: {{userdata.storage.hpsscount}}</div>
+                <div class="info-bg">DC2 Files: {{userdata.storage.dc2count}}</div>
+                <div class="info-bg">Home Files: {{userdata.storage.homecount}}</div>
+            </span>
+        </ion-item>
+        <ion-item>
+
+            <span class="icon-bg"><img class="icon-bg" src = "img/storage.png" style="float:left;width:100px;height:100px;"/></span>
+
+
+            <span class = "user-info">
+               
+                <div class="info-bg">RFS Storage: {{userdata.storage.rfsstorage}} GB </div>
+                <div class="info-bg">SDA Storage: {{userdata.storage.hpssstorage}} GB</div>
+                <div class="info-bg">DC2 Storage: {{userdata.storage.dc2storage}} GB</div>
+                <div class="info-bg">Home Storage: {{userdata.storage.homestorage}} GB</div>
+            </span>
+        </ion-item>
+         </ion-list>
+		<!--
+    	<ion-list class="listview">
+      		<ion-item ng-repeat="stat in stats"
+                href="#"><span class="overview-container"> {{stat.field}}</span> <span class="overview-value">{{stat.value}}</span></ion-item>
+	    </ion-list>-->
+	 </ion-content>
+</ion-view>

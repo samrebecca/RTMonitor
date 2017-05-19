@@ -1,0 +1,72 @@
+  <ion-view  view-title="RT Monitor" style="color: white" >
+  	<ion-content class="overview-container">
+        <ion-refresher
+            pulling-text="Pull to refresh..."
+            on-refresh="doRefresh()">
+        </ion-refresher>
+    	<ion-list class="listview">
+        <script id = "my-modal.html" type = "text/ng-template">
+           <ion-modal-view>        
+              <ion-content>
+                 <button class = "button icon icon-left ion-ios-close-outline"
+                    ng-click = "closeModal()">MOTD</button>
+                    <p id= "message" >{{motd}}</p>
+              </ion-content>
+           </ion-modal-view>
+        </script>
+        <h3><span  class="line-center">USERS</span></h3>
+        <ion-item  href="#/app/userstats">
+        <div class ="row info-new" >
+                <div class="info info-left" id="usersOnLogin" ng-style="userStyle">{{stats.others.usersOnLogin1[0]}}<div class="data">Users on Login Node1  </div></div>
+                <div class="info info-right" style="background-color:#660000;">{{stats.cpu.numberCPUUsers[0] + s.gpu.numberGPUUsers[0]}}<div class="data">Users Running Batch Jobs </div></div>
+        </div>
+            
+        </ion-item>
+        <h3><span  class="line-center">CPU Nodes</span></h3>
+        <ion-item href="#/app/cpustats">
+        <div class ="row info-new" >
+                
+                <div class="info info-left" ng-style="cpuDownStyle" ng-if="stats.cpu.downpercent >= 0">{{stats.cpu.downpercent}}<sup>%</sup><div class="data">{{stats.cpu.downCPUNodes[0]}} Down</div></div>
+                
+           
+                <div class="info" style="background-color:#800000;" ng-style = "cpuBusyStyle" ng-if="stats.cpu.busypercent >= 0">{{stats.cpu.busypercent}}<sup>%</sup><div class="data">{{stats.cpu.busyCPUNodes[0]}} Busy</div></div>
+               
+                <div class="info info-right" style="background-color:#660000;" ng-style="cpuIdleStyle">{{stats.cpu.idlepercent}}<sup>%</sup><div class="data">{{stats.cpu.idleCPUNodes[0]}} Idle</div></div>
+        </div>
+        </ion-item>
+        <h3><span  class="line-center">GPU Nodes</span></h3>
+        <ion-item href="#/app/gpustats">
+        <div class ="row info-new" >
+                <div class="info info-left" ng-style="gpuDownStyle"  ng-if="stats.gpu.downpercent >= 0" >{{stats.gpu.downpercent}}<sup>%</sup><div class="data">{{stats.gpu.downGPUNodes[0]}} Down</div></div>
+                <div class="info" style="background-color:#800000;" ng-style = "gpuBusyStyle" ng-if="stats.gpu.busypercent >= 0">{{stats.gpu.busypercent}}<sup>%</sup><div class="data">{{stats.gpu.busyGPUNodes[0]}} Busy</div></div>
+                <div class="info info-right" style="background-color:#660000;" ng-style="gpuIdleStyle">{{stats.gpu.idlepercent}}<sup>%</sup><div class="data">{{stats.gpu.idleGPUNodes[0]}} Idle</div></div>
+        </div>
+        </ion-item>
+             <h3><span  class="line-center">JOBS</span></h3>
+        <ion-item href="#/app/jobsstats">
+        <div class ="row info-new" >
+                <div class="info info-left" style="width:40%;" ng-style="runningJobsStyle">{{stats.jobs.runningpercent}}<sup>%</sup><div class="data">{{stats.jobs.runningJobs[0]}} Running</div></div>
+                <div class="info info-right" style="background-color:#660000;" ng-style="queuedJobsStyle">{{stats.jobs.queuedpercent}}<sup>%</sup><div class="data">{{stats.jobs.queuedJobs[0]}} Queued Jobs</div></div>
+        </div>
+         
+        </ion-item>
+        <ion-item href="#">
+        <div class ="row info-new" >
+                <div class="scheduler-bg" ng-if="stats.others.schedluerDown[0]==1" >
+                    <div class="scheduler" style="background-color:#660000">Scheduler Stopped</div>
+                </div>
+                <div class="scheduler-bg" ng-if="stats.others.schedluerDown[0]==0" >
+                    <div class="scheduler" style="background-color:green">Scheduler Running</div>
+                </div>
+        </div>
+        </ion-item>
+        <ion-item>
+  <button class="btn btn-lg.round  motd" ng-click="openModal()">MOTD</button>
+  <button class="btn btn-lg.round  it-notice" ng-click = "openBrowser()">IT NOTICES</button>
+
+    </ion-item>
+
+         </ion-list>
+	
+	 </ion-content>
+</ion-view>
